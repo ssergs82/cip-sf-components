@@ -1,32 +1,70 @@
 <template>
 	<div class="app slds-p-around_x-large">
 
-
-
 		<h1 class="slds-text-heading_large">{title}</h1>
-		<h3>Write JavaScript, HTML, and CSS code, and preview the output in the interactive code editor.</h3>
+		<h3>npx wcd-cli@latest serve --open</h3>
 
-		<c-CipTimeFrameDropdown></c-CipTimeFrameDropdown>
+		<div class="cip-filters-container">
+			Filters:
+			<c-cip-time-frame-dropdown></c-cip-time-frame-dropdown>
+			<c-cip-category-tree></c-cip-category-tree>
+		</div>
 
-		<!-- Using an if statement -->
-		<template if:true={showFeatures}>
-			<div class="slds-p-top_large">
-				<h2 class="slds-text-heading_medium">Features</h2>
-
-				<!-- Using a for statement -->
-				<!-- <template for:each={features} for:item='feature'>
-					<c-child label={feature.label} key={feature.label}>
-						<lightning-icon icon-name={feature.icon} size="x-small" slot="icon"></lightning-icon>
-					</c-child>
-				</template> -->
-			</div>
-		</template>
-
-		<h2 class="slds-text-heading_medium slds-p-top_large">Resources</h2>
-		<a href="https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_started_introduction">
-			Developer Guide
-		</a><br/>
-		<a href="https://developer.salesforce.com/docs/component-library/overview/components">Component Reference</a>
-
+		<div class="cip-accounts-container">
+			<table class="slds-table slds-table–bordered">
+				<thead>
+					<tr>
+						<th>
+							<lightning-formatted-text class="span-full-width" value="Company Name" data-id='Name'
+								onclick={onSortFieldChange}></lightning-formatted-text>
+						</th>
+						<th>
+							<lightning-formatted-text class="span-full-width" value="Intent Score" data-id='IntentScore'
+								onclick={onSortFieldChange}></lightning-formatted-text>
+						</th>
+						<th>
+							<lightning-formatted-text class="span-full-width" value="Change" data-id='ScoreChange'
+								onclick={onSortFieldChange}></lightning-formatted-text>
+						</th>
+						<th>Company Size</th>
+						<th>Yearly Revenue, $</th>
+						<th>Industry</th>
+					</tr>
+				</thead>
+				<tbody>
+					<template for:each={accounts} for:item='item'>
+						<tr key={item.accountId}>
+							<td>
+								<template if:true={item.hasSalesForceRecordUrl}>
+									<lightning-formatted-url value={item.salesForceRecordUrl} label={item.name}
+										target="_blank"></lightning-formatted-url>
+								</template>
+								<template if:false={item.hasSalesForceRecordUrl}>
+									<lightning-formatted-text value={item.name}></lightning-formatted-text>
+								</template>
+							</td>
+							<td>
+								<lightning-formatted-number value={item.intentScore}></lightning-formatted-number>
+							</td>
+							<td>
+								<lightning-formatted-number value={item.scoreChange}></lightning-formatted-number>
+							</td>
+							<td>
+								<lightning-formatted-text value={item.companySize}></lightning-formatted-text>
+							</td>
+							<td>
+								<lightning-formatted-text value={item.yearlyRevenue}></lightning-formatted-text>
+							</td>
+							<td>
+								<lightning-formatted-text value={item.industry}></lightning-formatted-text>
+							</td>
+						</tr>
+					</template>
+					<td colspan="6">
+						<c-cip-pagination total={total}></c-cip-pagination>
+					</td>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </template>

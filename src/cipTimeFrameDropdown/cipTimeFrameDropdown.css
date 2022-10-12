@@ -1,0 +1,14 @@
+/*working!*/
+.slds-form-element {
+  background-color: white;
+  padding: 5px;
+  max-width: 250px;
+}
+
+/*not working!*/
+label.slds-form-element__label {
+  padding-top: 0px;
+  color: rgb(3, 45, 96);
+  font-size: 14px;
+  font-weight: bold;
+}

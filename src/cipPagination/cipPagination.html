@@ -1,0 +1,57 @@
+<template>
+	<div>
+		<div style="float:left;margin-top:10px;">Show rows</div>
+		<div style="float:left; width:60px;margin-left:10px;">
+			<lightning-combobox name="pageSizeDropdown" label="Show rows" id="pageSizeDropdown" value={pageSize}
+				onchange={onPageSizeChange} options={pageSizeOptions}>
+			</lightning-combobox>
+		</div>
+		<div style="float:right;">
+			<div style="float:left;margin-top:10px;margin-right:10px;">{currentPageRowsStats}</div>
+			<div style="float:right;">
+				<lightning-button-group>
+
+					<lightning-button label='prev' disabled={prevButtonDisabled} onclick={onPrevPageClick}>
+					</lightning-button>
+
+					<template for:each={startButtons} for:item='b'>
+						<lightning-button key={b.value} data-id={b.value} label={b.value} disabled={b.isDisabled}
+							onclick={onPageClick}></lightning-button>
+					</template>
+
+					<template if:true={hasMiddleButtons}>
+						<span>...</span>
+						<template for:each={middleButtons} for:item='b'>
+							<lightning-button key={b.value} data-id={b.value} label={b.value} disabled={b.isDisabled}
+								onclick={onPageClick}></lightning-button>
+						</template>
+						<span>...</span>
+					</template>
+					<template if:false={hasMiddleButtons}>
+						<template if:true={maxPageNumberMoreThan4}>
+							<span>...</span>
+						</template>
+					</template>
+
+					<template for:each={endButtons} for:item='b'>
+						<lightning-button key={b.value} data-id={b.value} label={b.value} disabled={b.isDisabled}
+							onclick={onPageClick}></lightning-button>
+					</template>
+
+					<lightning-button label='next' disabled={nextButtonDisabled} onclick={onNextPageClick}>
+					</lightning-button>
+
+				</lightning-button-group>
+
+				<span>Go to page</span>
+				<div style="float:right;max-width:65px;">
+					<span onkeypress={onPageToGoKeyPress}>
+						<lightning-input type="number" name="pageToGo" label="Page to go" value=0 step="1">
+						</lightning-input>
+					</span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</template>
