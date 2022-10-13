@@ -51,6 +51,10 @@ const ENUMS = {
     }
 };
 
+const createUniqueId = function() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
+
 const getRequestParams = function() {
   const { hostname } = new URL(window.location.href);
   let hostnameBase64 = btoa(hostname);
@@ -64,4 +68,4 @@ const getRequestParams = function() {
 
 const CipBaseUrl = "http://localhost:3001";//"https://staging-api.contentgine.com";
 
-export { ENUMS, getRequestParams, CipBaseUrl};
+export { ENUMS, getRequestParams, CipBaseUrl, createUniqueId};

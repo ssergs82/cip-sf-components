@@ -8,6 +8,15 @@
 			Filters:
 			<c-cip-time-frame-dropdown></c-cip-time-frame-dropdown>
 			<c-cip-category-tree></c-cip-category-tree>
+			<c-cip-multi-select-dropdown filter-property="companySize" ms-label="Company Size:"
+				ms-options={companySizeOptions} max-selected-show="2">
+			</c-cip-multi-select-dropdown>
+			<c-cip-multi-select-dropdown filter-property="yearlyRevenue" ms-label="Yearly Revenue:"
+				ms-options={yearlyRevenueOptions} max-selected-show="1">
+			</c-cip-multi-select-dropdown>
+			<c-cip-multi-select-dropdown filter-property="industry" ms-label="Industry:"
+				ms-options={industryOptions} max-selected-show="1">
+			</c-cip-multi-select-dropdown>
 		</div>
 
 		<div class="cip-accounts-container">

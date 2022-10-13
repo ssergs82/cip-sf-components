@@ -1,0 +1,69 @@
+<template>
+	<!-- DROPDOWN Component Code Starts HERE-->
+	<div class="slds-form-element">
+		<template if:true={isMsLabelVisible}>
+			<label class="slds-form-element__label">{msLabel}</label>
+		</template>
+		<div class="slds-form-element__control">
+			<div class="slds-combobox_container slds-size_small">
+				<div 
+					class="slds-dropdown-trigger slds-dropdown-trigger_click slds-picklist ms-picklist-dropdown"
+					aria-expanded="false" aria-haspopup="listbox" role="listbox">
+					
+					<!-- MAIN BUTTON CODE -->
+					<div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+						<input class="slds-combobox__input ms-input" aria-controls="ms-dropdown-items"
+							role="textbox" type="text" placeholder={selectedLabel} value="" readonly />
+						<span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right"
+							title="Click to open dropdown">
+							<!-- showing clear selection button -->
+							<template if:true={isClearButtonVisible}>
+								<span class="ms-clear-button-wrapper">
+									<lightning-button-icon icon-name="utility:close"
+										alternative-text="Clear all selections" onclick={onClearClick}>
+									</lightning-button-icon>
+								</span>
+							</template>
+							<lightning-icon icon-name="utility:chevrondown" size="x-small"
+								class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small">
+							</lightning-icon>
+						</span>
+					</div>
+					<!-- MAIN BUTTON CODE ENDS -->
+
+					<!-- Drop down list -->
+					<div class="ms-dropdown-items" role="listbox">
+						<!-- Creating unordered list -->
+						<ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid ms-dropdown"
+							role="presentation">
+
+							<!-- Generating list item by iterating over options -->
+							<template for:each={msOptions} for:item='item'>
+								<li key={item.Id}
+									role="presentation"
+									class="slds-listbox__item ms-list-item"
+									data-id={item.Id} data-name={item.Name}>
+									<div
+										class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center"
+										role="option">
+										<!-- Body of each list item -->
+										<span class="slds-media__body">
+											<span class="slds-truncate" title={item.Name}>{item.Name}</span>
+										</span>
+										<!-- Icon for each list item -->
+										<span class="slds-media__figure">
+											<lightning-icon icon-name="utility:check" size="x-small"
+												class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small">
+											</lightning-icon>
+										</span>
+									</div>
+								</li>
+							</template>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- DROPDOWN Component Code Ends HERE-->
+</template>
